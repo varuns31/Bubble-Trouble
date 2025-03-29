@@ -1,0 +1,18 @@
+Fitter Status : Successful - Fri May 05 10:54:28 2023
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : Lab7
+Top-level Entity Name : lab7
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total logic elements : 17,388 / 49,760 ( 35 % )
+    Total combinational functions : 16,735 / 49,760 ( 34 % )
+    Dedicated logic registers : 2,923 / 49,760 ( 6 % )
+Total registers : 2992
+Total pins : 141 / 360 ( 39 % )
+Total virtual pins : 0
+Total memory bits : 1,036,636 / 1,677,312 ( 62 % )
+Embedded Multiplier 9-bit elements : 24 / 288 ( 8 % )
+Total PLLs : 1 / 4 ( 25 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )

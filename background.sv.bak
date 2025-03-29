@@ -1,0 +1,61 @@
+module bottom_screen_example (
+	input logic vga_clk,
+	input logic [9:0] DrawX, DrawY,
+	input logic blank,
+	output logic [3:0] red, green, blue
+);
+logic [15:0] rom_address;
+logic [8:0] rom_q , rom_q2;
+
+logic [3:0] palette_red_bottom, palette_green_bottom, palette_blue_bottom;
+logic [3:0] palette_red_brick, palette_green, palette_blue;
+
+
+logic negedge_vga_clk;
+
+// read from ROM on negedge, set pixel on posedge
+assign negedge_vga_clk = ~vga_clk;
+
+assign rom_address = ((DrawX * 540) / 640) + (((DrawY * 82) / 480) * 540);
+
+always_ff @ (posedge vga_clk) begin
+	red <= 4'h0;
+	green <= 4'h0;
+	blue <= 4'h0;
+
+	if (blank) begin
+		red <= palette_red;
+		green <= palette_green;
+		blue <= palette_blue;
+	end
+end
+
+
+bottom_screen_rom bottom_screen_rom (
+	.clock   (negedge_vga_clk),
+	.address (rom_address),
+	.q       (rom_q)
+);
+
+bottom_screen_palette bottom_screen_palette (
+	.index (rom_q),
+	.red   (palette_red_bottom),
+	.green (palette_green_bottom),
+	.blue  (palette_blue_bottom)
+);
+
+
+brick_rom brick_rom (
+	.clock   (negedge_vga_clk),
+	.address (rom_address),
+	.q       (rom_q)
+);
+
+brick_palette brick_palette (
+	.index (rom_q),
+	.red   (palette_red),
+	.green (palette_green),
+	.blue  (palette_blue)
+);
+
+endmodule
